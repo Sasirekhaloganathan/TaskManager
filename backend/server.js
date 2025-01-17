@@ -23,14 +23,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// error handler middleware
+
 app.use(errorHandler);
 
-//routes
+
 const routeFiles = fs.readdirSync("./src/routes");
 
 routeFiles.forEach((file) => {
-  // use dynamic import
+  
   import(`./src/routes/${file}`)
     .then((route) => {
       app.use("/api/v1", route.default);
